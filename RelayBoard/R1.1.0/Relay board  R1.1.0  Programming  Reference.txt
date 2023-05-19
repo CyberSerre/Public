@@ -1,7 +1,7 @@
 Relay board  R1.1.0
 
-Voltage:120Vac ( support higher voltage but untested)
-Max Capacity: 15A total/ 5A per output
+ESP module:
+	ESP32-C3
 
 Pin Mapping:
 	RELAY1 GPIO_NUM_0
