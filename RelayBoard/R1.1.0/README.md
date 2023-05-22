@@ -1,8 +1,12 @@
 # RelayBoard
 
-Hi Everyone,
+Arduino configuration used to create the Arduino example:
+    -Arduino IDE 2.1.0 (Window 10 pro)
+    -ESP32 board package by  Espressif
+    -PubSubClient 2.8  by Nick
+    -board:ESP32C3 Dev Module 
 
-this github is a work in progress. I created it to share a base code to use our Relay board with the MQTT protocole. This device and code work fine for the last 6 months in our office. We wanted to keep the code simple. We know we did some bad thing but we will create another example with a better code in the future.
-Feel free to use it or submit a pull request:)
-
+Esp-idf configuration usd to create the esp-idf example:
+    -Visual Studio Code 1.77.3 (Ubuntu 20.04)
+    -ESP-IDF v5.0 from Espressif Github
 
