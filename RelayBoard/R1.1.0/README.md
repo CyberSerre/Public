@@ -9,4 +9,5 @@ Arduino configuration used to create the Arduino example: <br />
 Esp-idf configuration usd to create the esp-idf example: <br />
     -Visual Studio Code 1.77.3 (Ubuntu 20.04) <br />
     -ESP-IDF v5.0 from Espressif Github <br />
+    -ESP32C3 module
 
