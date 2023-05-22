@@ -5,5 +5,5 @@
 #define TOPIC_RELAY3 "/test/R3"
 #define TOPIC_RELAY4 "/test/R4"
 
-#define EXAMPLE_ESP_WIFI_SSID      "Adams Network"
-#define EXAMPLE_ESP_WIFI_PASS      "abcd1234!"
+#define EXAMPLE_ESP_WIFI_SSID      "Network Name"
+#define EXAMPLE_ESP_WIFI_PASS      "Network Password"
