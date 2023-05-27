@@ -1,0 +1,583 @@
+[
+    {
+        "id": "e4991ba5.479aa8",
+        "type": "tab",
+        "label": "Flow 5",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "3cba0065.187d6",
+        "type": "inject",
+        "z": "e4991ba5.479aa8",
+        "name": "System HeartBeat",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "30",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 310,
+        "y": 380,
+        "wires": [
+            [
+                "c0ee2bae.d3ff68",
+                "8c9c876f.db8eb8",
+                "e2a1dfb6.195d1"
+            ]
+        ]
+    },
+    {
+        "id": "da4c54d4.facb28",
+        "type": "change",
+        "z": "e4991ba5.479aa8",
+        "name": "ON",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "1",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 850,
+        "y": 320,
+        "wires": [
+            [
+                "6af4d93f.4812b8"
+            ]
+        ]
+    },
+    {
+        "id": "cde80256.6e635",
+        "type": "change",
+        "z": "e4991ba5.479aa8",
+        "name": "OFF",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "0",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 850,
+        "y": 440,
+        "wires": [
+            [
+                "6af4d93f.4812b8"
+            ]
+        ]
+    },
+    {
+        "id": "c0ee2bae.d3ff68",
+        "type": "mqtt out",
+        "z": "e4991ba5.479aa8",
+        "name": "system/HeartBeat",
+        "topic": "system/HeartBeat",
+        "qos": "",
+        "retain": "",
+        "broker": "d4db059b.ddfad8",
+        "x": 570,
+        "y": 500,
+        "wires": []
+    },
+    {
+        "id": "d458439.2d53dc",
+        "type": "mqtt out",
+        "z": "e4991ba5.479aa8",
+        "name": "RelayBox_relay1",
+        "topic": "/test/R1",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "d4db059b.ddfad8",
+        "x": 1290,
+        "y": 360,
+        "wires": []
+    },
+    {
+        "id": "7e5a2e5a.b0fd9",
+        "type": "change",
+        "z": "e4991ba5.479aa8",
+        "name": "ON",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "1",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 850,
+        "y": 600,
+        "wires": [
+            [
+                "5e2488ec.9704f8"
+            ]
+        ]
+    },
+    {
+        "id": "41194dbc.84cb14",
+        "type": "change",
+        "z": "e4991ba5.479aa8",
+        "name": "OFF",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "0",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 850,
+        "y": 720,
+        "wires": [
+            [
+                "5e2488ec.9704f8"
+            ]
+        ]
+    },
+    {
+        "id": "245bd837.0cece8",
+        "type": "mqtt out",
+        "z": "e4991ba5.479aa8",
+        "name": "RelayBox_relay2",
+        "topic": "/test/R2",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "d4db059b.ddfad8",
+        "x": 1310,
+        "y": 660,
+        "wires": []
+    },
+    {
+        "id": "5e2488ec.9704f8",
+        "type": "function",
+        "z": "e4991ba5.479aa8",
+        "name": "OverWrite",
+        "func": "\n\n\nvar overwrite=flow.get(\"overwrite\");\n\n\nif(msg.topic==\"overwrite\")\n{\n        overwrite=msg.payload;\n        flow.set(\"overwrite\",overwrite);\n    \n}\n\n\n\nif(overwrite)\n{\n    if(msg.topic==\"overwriteValue\")\n        return msg; \n    \n}\nelse\n    return msg; \n    \n\n\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "// Code added here will be run once\n// whenever the node is deployed.\nflow.set(\"overwrite\",false);\n",
+        "finalize": "",
+        "libs": [],
+        "x": 1060,
+        "y": 660,
+        "wires": [
+            [
+                "245bd837.0cece8",
+                "4be17ab6.c83ec4"
+            ]
+        ]
+    },
+    {
+        "id": "4be17ab6.c83ec4",
+        "type": "debug",
+        "z": "e4991ba5.479aa8",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1250,
+        "y": 920,
+        "wires": []
+    },
+    {
+        "id": "5e4fe74b.b9c868",
+        "type": "change",
+        "z": "e4991ba5.479aa8",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "overwrite",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 850,
+        "y": 800,
+        "wires": [
+            [
+                "5e2488ec.9704f8"
+            ]
+        ]
+    },
+    {
+        "id": "fc97ec79.7ac7",
+        "type": "change",
+        "z": "e4991ba5.479aa8",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "overwriteValue",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 850,
+        "y": 860,
+        "wires": [
+            [
+                "5e2488ec.9704f8"
+            ]
+        ]
+    },
+    {
+        "id": "38b52db3.7a7d92",
+        "type": "change",
+        "z": "e4991ba5.479aa8",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "overwrite",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 850,
+        "y": 160,
+        "wires": [
+            [
+                "6af4d93f.4812b8"
+            ]
+        ]
+    },
+    {
+        "id": "cd180da0.94359",
+        "type": "change",
+        "z": "e4991ba5.479aa8",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "overwriteValue",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 850,
+        "y": 220,
+        "wires": [
+            [
+                "6af4d93f.4812b8"
+            ]
+        ]
+    },
+    {
+        "id": "6af4d93f.4812b8",
+        "type": "function",
+        "z": "e4991ba5.479aa8",
+        "name": "OverWrite",
+        "func": "\n\n\nvar overwrite=flow.get(\"overwrite\");\n\n\nif(msg.topic==\"overwrite\")\n{\n        overwrite=msg.payload;\n        flow.set(\"overwrite\",overwrite);\n    \n}\n\n\n\nif(overwrite)\n{\n    if(msg.topic==\"overwriteValue\")\n        return msg; \n    \n}\nelse\n    return msg; \n    \n\n\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "// Code added here will be run once\n// whenever the node is deployed.\nflow.set(\"overwrite\",false);\n",
+        "finalize": "",
+        "libs": [],
+        "x": 1060,
+        "y": 360,
+        "wires": [
+            [
+                "d458439.2d53dc"
+            ]
+        ]
+    },
+    {
+        "id": "ac412b1c.6f6578",
+        "type": "ui_switch",
+        "z": "e4991ba5.479aa8",
+        "name": "",
+        "label": "Over write Relay 2",
+        "tooltip": "",
+        "group": "61285987.c20328",
+        "order": 15,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "decouple": "false",
+        "topic": "overwrite",
+        "topicType": "msg",
+        "style": "",
+        "onvalue": "true",
+        "onvalueType": "bool",
+        "onicon": "",
+        "oncolor": "",
+        "offvalue": "false",
+        "offvalueType": "bool",
+        "officon": "",
+        "offcolor": "",
+        "animate": false,
+        "className": "",
+        "x": 550,
+        "y": 780,
+        "wires": [
+            [
+                "5e4fe74b.b9c868"
+            ]
+        ]
+    },
+    {
+        "id": "23184ddc.a31902",
+        "type": "ui_switch",
+        "z": "e4991ba5.479aa8",
+        "name": "Over write value Relay 2",
+        "label": "Over write value Relay 2",
+        "tooltip": "",
+        "group": "61285987.c20328",
+        "order": 15,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "decouple": "false",
+        "topic": "overwrite",
+        "topicType": "msg",
+        "style": "",
+        "onvalue": "1",
+        "onvalueType": "str",
+        "onicon": "",
+        "oncolor": "",
+        "offvalue": "0",
+        "offvalueType": "str",
+        "officon": "",
+        "offcolor": "",
+        "animate": false,
+        "className": "",
+        "x": 570,
+        "y": 860,
+        "wires": [
+            [
+                "fc97ec79.7ac7"
+            ]
+        ]
+    },
+    {
+        "id": "c4714c77.1ec3",
+        "type": "ui_switch",
+        "z": "e4991ba5.479aa8",
+        "name": "",
+        "label": "Over write Relay 1",
+        "tooltip": "",
+        "group": "61285987.c20328",
+        "order": 15,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "decouple": "false",
+        "topic": "overwrite",
+        "topicType": "msg",
+        "style": "",
+        "onvalue": "true",
+        "onvalueType": "bool",
+        "onicon": "",
+        "oncolor": "",
+        "offvalue": "false",
+        "offvalueType": "bool",
+        "officon": "",
+        "offcolor": "",
+        "animate": false,
+        "className": "",
+        "x": 590,
+        "y": 160,
+        "wires": [
+            [
+                "38b52db3.7a7d92"
+            ]
+        ]
+    },
+    {
+        "id": "259d885a.03ef68",
+        "type": "ui_switch",
+        "z": "e4991ba5.479aa8",
+        "name": "Over write value Relay 1",
+        "label": "Over write value Relay 1",
+        "tooltip": "",
+        "group": "61285987.c20328",
+        "order": 15,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "decouple": "false",
+        "topic": "overwrite",
+        "topicType": "msg",
+        "style": "",
+        "onvalue": "1",
+        "onvalueType": "str",
+        "onicon": "",
+        "oncolor": "",
+        "offvalue": "0",
+        "offvalueType": "str",
+        "officon": "",
+        "offcolor": "",
+        "animate": false,
+        "className": "",
+        "x": 610,
+        "y": 220,
+        "wires": [
+            [
+                "cd180da0.94359"
+            ]
+        ]
+    },
+    {
+        "id": "8c9c876f.db8eb8",
+        "type": "time-range-switch",
+        "z": "e4991ba5.479aa8",
+        "name": "Schedule Relay 1",
+        "lat": "",
+        "lon": "",
+        "startTime": "7:30",
+        "endTime": "20:30",
+        "startOffset": 0,
+        "endOffset": 0,
+        "x": 570,
+        "y": 380,
+        "wires": [
+            [
+                "da4c54d4.facb28"
+            ],
+            [
+                "cde80256.6e635"
+            ]
+        ]
+    },
+    {
+        "id": "e2a1dfb6.195d1",
+        "type": "time-range-switch",
+        "z": "e4991ba5.479aa8",
+        "name": "Schedule Relay 2",
+        "lat": "",
+        "lon": "",
+        "startTime": "8:45",
+        "endTime": "21:00",
+        "startOffset": 0,
+        "endOffset": 0,
+        "x": 530,
+        "y": 660,
+        "wires": [
+            [
+                "7e5a2e5a.b0fd9"
+            ],
+            [
+                "41194dbc.84cb14"
+            ]
+        ]
+    },
+    {
+        "id": "d4db059b.ddfad8",
+        "type": "mqtt-broker",
+        "name": "Raspberry Pi",
+        "broker": "192.168.1.13",
+        "port": "1883",
+        "clientid": "NodRed",
+        "autoConnect": true,
+        "usetls": false,
+        "compatmode": false,
+        "protocolVersion": 4,
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": ""
+    },
+    {
+        "id": "61285987.c20328",
+        "type": "ui_group",
+        "name": "Lighting",
+        "tab": "651321e1.12eba",
+        "order": 1,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "651321e1.12eba",
+        "type": "ui_tab",
+        "name": "Light",
+        "icon": "dashboard",
+        "disabled": false,
+        "hidden": false
+    }
+]
